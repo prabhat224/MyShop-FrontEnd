@@ -11,8 +11,8 @@ import {
 const navigation = [
   { name: "Grocery", href: "#", current: true },
   { name: "Fasion", href: "#", current: false },
-//   { name: "Electronics", href: "#", current: false },
-//   { name: "Home Furniture", href: "#", current: false },
+  { name: "Electronics", href: "#", current: false },
+  { name: "Home Furniture", href: "#", current: false },
 ];
 
 function classNames(...classes) {
@@ -49,7 +49,7 @@ const Navbar = () => {
                   <div className="hidden sm:ml-6 sm:block">
                     <div className="flex space-x-4">
                       {navigation.map((item) => (
-                        <a
+                        <Link to='/'
                           key={item.name}
                           href={item.href}
                           className={classNames(
@@ -61,21 +61,21 @@ const Navbar = () => {
                           aria-current={item.current ? "page" : undefined}
                         >
                           {item.name}
-                        </a>
+                        </Link>
                       ))}
                     </div>
                   </div>
                 </div>
                 <div className=" absolute inset-y-0 right-0 flex items-center pr-2 sm:static sm:inset-auto sm:ml-6 sm:pr-0">
-                  <button
+                 <Link to='/cart'>
+                 <button
                     type="button"
                     className="  rounded-full bg-gray-800 p-1 text-gray-400 hover:text-white "
                   >
-                    <span className="absolute -inset-1.5" />
-                    <span className="sr-only">View notifications</span>
                     <ShoppingCartIcon className="h-6 w-6" aria-hidden="true" />
                   </button>
-                  <span className="inline-flex mb-7 -ml-3  items-center rounded-md bg-redF-100 px-2 py-1 text-xs font-medium text-red-700 ring-1 ring-inset ring-red-600/10">
+                 </Link>
+                  <span className="inline-flex mb-7 -ml-3  items-center rounded-md bg-redF-100 px-2 py-1 text-xs font-medium bg-red-100 text-red-700 ring-1 ring-inset ring-red-600/10">
         0
       </span>
 

@@ -1,20 +1,15 @@
 import React from 'react';
-import logo from './logo.svg';
-import { Counter } from './features/productList/ProductList';
 import './App.css';
-// import Products from '../src/features/productList/ProductList'
-import Navbar from './features/Components/Navbar';
 import Home from './Pages/Home';
 import Login from './Pages/Login';
 import Signup from './Pages/Signup';
 import {
   createBrowserRouter,
   RouterProvider,
-  Route,
-  Routes,
-  BrowserRouter,
-  Link,
 } from "react-router-dom";
+import Cart from './features/Cart/Cart';
+import Checkout from './Pages/Checkout';
+import ProductDetailPage from './Pages/ProductDetailPage';
 
 const router = createBrowserRouter([
   {
@@ -30,6 +25,18 @@ const router = createBrowserRouter([
   {
     path: "/signup",
     element: <Signup/>
+  },
+  {
+    path: "/cart",
+    element: <Cart/>
+  },
+  {
+    path: "/checkout",
+    element: <Checkout/>
+  },
+  {
+    path: "/productdetails",
+    element: <ProductDetailPage/>
   },
 ]);
 

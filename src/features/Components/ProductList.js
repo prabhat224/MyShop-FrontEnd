@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, incrementAsync } from "./ProductListSlice";
+import { increment, incrementAsync } from "../productList/ProductSlice";
 import { Fragment } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
 import { XMarkIcon } from "@heroicons/react/24/outline";
@@ -11,7 +11,7 @@ import {
   PlusIcon,
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
-import Footer from "../Components/Footer";
+import Footer from "./Footer";
 
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
