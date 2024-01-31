@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { increment, incrementAsync } from "../productList/ProductSlice";
 import { Fragment } from "react";
 import { Dialog, Disclosure, Menu, Transition } from "@headlessui/react";
-import { XMarkIcon } from "@heroicons/react/24/outline";
+import { StarIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { Link } from "react-router-dom";
+// import { useSelector } from "react-redux";
 import {
   ChevronDownIcon,
   FunnelIcon,
@@ -12,7 +13,7 @@ import {
   Squares2X2Icon,
 } from "@heroicons/react/20/solid";
 import Footer from "./Footer";
-
+import ProductSlice from "../productList/ProductSlice";
 const sortOptions = [
   { name: "Most Popular", href: "#", current: true },
   { name: "Best Rating", href: "#", current: false },
@@ -27,6 +28,7 @@ const subCategories = [
   { name: "Hip Bags", href: "#" },
   { name: "Laptop Sleeves", href: "#" },
 ];
+
 const filters = [
   {
     id: "color",
@@ -69,7 +71,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 
-const products = [
+const oldproducts = [
   {
     id: 1,
     name: "Basic Tee",
@@ -122,9 +124,11 @@ const products = [
   },
   // More products...
 ];
+
+
 export default function ProductList() {
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
-
+  const products1=useSelector(state=>state.products)
   return (
     <div>
       <div className="bg-white">
@@ -399,23 +403,56 @@ export default function ProductList() {
                 </form>
 
                 {/* Product grid */}
-                <div className="lg:col-span-3">
-                  <div className="bg-white">
+                <div className="lg:col-span-3 gap-3 ">
+                  <div className="bg-white-100">
                     <div className="mx-auto max-w-2xl px-4 py-16 sm:px-6 sm:py-24 lg:max-w-7xl lg:px-8">
-                      <div className="mt-0  grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                      {/* <div className="grid grid-cols-3 ">
                         {products.map((product) => (
-                          <div key={product.id} className="group relative ">
-                            <div className="aspect-h-1 aspect-w-1 w-full overflow-hidden rounded-md  bg-gray-200 lg:aspect-none group-hover:opacity-75 lg:h-80">
+                          <div>
+                            <div key={product.id}>
+                              <div className="flex pt-10 pb-10 h-96 items-center justify-center bg-gray-100">
+                                <div className="mx-auto px-5">
+                                  <div className="max-w-xs cursor-pointer rounded-lg bg-white p-2 shadow duration-150 hover:scale-105 hover:shadow-md w-52 h-72">
+                                    <img
+                                      className=" rounded-lg object-cover object-center w-full max-h-28"
+                                      src={product.thumbnail}
+                                      alt="product"
+                                    />
+                                    <p className="my-4 pl-4 font-semibold text-gray-500 text-sm">
+                                      {product.title}
+                                    </p>
+                                    <p className="mb-4 ml-4 text-m font-semibold text-gray-800">
+                                      ${product.price}
+                                    </p>
+                                    <button
+                                      className="middle none rounded-lg bg-blue-500 py-3 px-6 font-sans text-xs font-bold uppercase text-white shadow-md shadow-blue-500/20 transition-all hover:shadow-lg hover:shadow-blue-500/40 focus:opacity-[0.85] focus:shadow-none active:opacity-[0.85] active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                                      data-ripple-light="true"
+                                    >
+                                      Buy Now
+                                    </button>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                          </div>
+                        ))}
+                      </div> */}
+                      {/* previous product template */}
+                      <div className="mt-0  grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                        {products1.map((product) => (
+                        <Link to='/productdetails'>
+                          <div key={product.id} className="group relative border-solid border-2  border-gray-300 pd-5 rounded-md h-auto ">
+                            <div className=" w-full overflow-hidden p-3 rounded-md  lg:aspect-none group-hover:opacity-75 lg:h-60">
                               <img
-                                src={product.imageSrc}
-                                alt={product.imageAlt}
-                                className="h-full w-full object-cover object-center lg:h-full lg:w-full"
+                                src={product.thumbnail}
+                                alt={product.title}
+                                className="max-h-52 w-full object-cover object-center lg:h-full lg:w-full"
                               />
                             </div>
-                            <div className="mt-4 flex justify-between">
+                            <div className=" flex justify-between">
                               <div>
                                 <h3 className="text-sm text-gray-700">
-                                  <a href={product.href}>
+                                  <a href='#'>
                                     <span
                                       aria-hidden="true"
                                       className="absolute inset-0"
@@ -423,23 +460,26 @@ export default function ProductList() {
                                     {product.name}
                                   </a>
                                 </h3>
-                                <p className="mt-1 text-sm text-gray-500">
-                                  {product.color}
-                                </p>
+                                <div className="mt-1 ml-2 text-sm text-gray-500 ">
+                                 <span className=""> {product.rating}</span>
+                                <StarIcon className="w-4 h-4 inline m-2 mb-3"></StarIcon>
+                                </div>
                               </div>
-                              <p className="text-sm font-medium text-gray-900">
-                                {product.price}
+                              <p className="text-sm mt-2 mr-2 font-medium text-gray-900">
+                               ${product.price}
                               </p>
                             </div>
                           </div>
+                        </Link>
                         ))}
+
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
             </section>
-            <Footer/>
+            <Footer />
           </main>
         </div>
       </div>
